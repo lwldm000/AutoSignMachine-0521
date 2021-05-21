@@ -1,0 +1,105 @@
+service: auto-sign-matchine
+
+provider: # provider information
+  name: tencent
+  runtime: Nodejs12.16 # Nodejs8.9 or Nodejs6.10
+  credentials: ~/credentials
+
+# you can overwrite defaults here
+#  stage: dev
+#  cosBucket: DEFAULT
+#  role: QCS_SCFExcuteRole
+#  memorySize: 256
+#  timeout: 10
+#  region: ap-shanghai
+#  environment:
+#    variables:
+#      ENV_FIRST: env1
+#      ENV_SECOND: env2
+#  vpcConfig:
+#    vpcId: test
+#    subnetId: test
+
+plugins:
+  - serverless-tencent-scf
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+
+# 免费用户执行时长不得超过900秒
+
+functions:
+  task1:
+    handler: tscf.main_handler
+    description: 每日签到、东奥积分、定向积分、沃之树、游戏中心签到、定向积分每日抽奖、每日评论经验、APP下载领积分
+    runtime: Nodejs12.16
+    memorySize: 256
+    timeout: 900
+    environment:
+      variables:
+        cmd: unicom
+        config: default.json
+        tasks: dailysignin,winterTwo,dxIntegralEveryDay,dailywoTree,producGameSignin,dailylotteryintegral,dailycomment,dailyDownloadApp
+    events:
+     - timer:
+        name: timer
+        parameters:
+          cronExpression: '0 40 8 * * * *'
+          enable: true
+  task2:
+    handler: tscf.main_handler
+    description: 玩游戏 领流量
+    runtime: Nodejs12.16
+    memorySize: 256
+    timeout: 900
+    environment:
+      variables:
+        cmd: unicom
+        config: default.json
+        tasks: dailygameflow
+    events:
+     - timer:
+        name: timer
+        parameters:
+          cronExpression: '0 0 9-14 * * * *'
+          enable: true
+  task3:
+    handler: tscf.main_handler
+    description: 游戏中心-积分任务
+    runtime: Nodejs12.16
+    memorySize: 256
+    timeout: 900
+    environment:
+      variables:
+        cmd: unicom
+        config: default.json
+        tasks: dailygameIntegral
+    events:
+     - timer:
+        name: timer
+        parameters:
+          cronExpression: '0 30 11-13 * * * *'
+          enable: true
+  task4:
+    handler: tscf.main_handler
+    description: 游戏中心-流量领取
+    runtime: Nodejs12.16
+    memorySize: 256
+    timeout: 900
+    environment:
+      variables:
+        cmd: unicom
+        config: default.json
+        tasks: dailyGetGameflow,todayDailyTask
+    events:
+     - timer:
+        name: timer
+        parameters:
+          cronExpression: '0 30 21 * * * *'
+          enable: true
