@@ -76,7 +76,16 @@ jobs:
     # 运行 unicom 签到任务
     - name: Run unicom daily task
       env:
-        config: ${{secrets.CONFIG}}
-      run: |
-        echo "$config" > ./config.json
-        node index.js unicom --config config.json
+        user1: ${{secrets.user1}}
+        password1: ${{secrets.password1}}
+        appid1: ${{secrets.appid1}}
+        user2: ${{secrets.user2}}
+        password2: ${{secrets.password2}}
+        appid2: ${{secrets.appid2}}
+        user3: ${{secrets.user3}}
+        password3: ${{secrets.password3}}
+        appid3: ${{secrets.appid3}}
+        notify_sctkey: ${{secrets.NOTIFY_SCKEY}}
+      run: node index.js unicom --user=${user1} --password=${password1} --appid=${appid1} 
+           node index.js unicom --user=${user2} --password=${password2} --appid=${appid2} 
+           node index.js unicom --user=${user3} --password=${password3} --appid=${appid3} 
