@@ -85,6 +85,7 @@ jobs:
         htVD_2132_auth: ${{secrets.htVD_2132_auth}}
         htVD_2132_saltkey: ${{secrets.htVD_2132_saltkey}}
         notify_sctkey: ${{secrets.NOTIFY_SCKEY}}
-      run: node index.js iqiyi --P00001=${iqiyi1_P00001} --P00PRU=${iqiyi1_P00PRU} --QC005=${iqiyi1_QC005} --dfp=${iqiyi1_dfp} ;
-           node index.js iqiyi --P00001=${iqiyi2_P00001} --P00PRU=${iqiyi2_P00PRU} --QC005=${iqiyi2_QC005} --dfp=${iqiyi2_dfp} ;
+      run: |
+           node index.js iqiyi --P00001=${iqiyi1_P00001} --P00PRU=${iqiyi1_P00PRU} --QC005=${iqiyi1_QC005} --dfp=${iqiyi1_dfp} 
+           node index.js iqiyi --P00001=${iqiyi2_P00001} --P00PRU=${iqiyi2_P00PRU} --QC005=${iqiyi2_QC005} --dfp=${iqiyi2_dfp} 
            node index.js 52pojie --htVD_2132_auth=${htVD_2132_auth} --htVD_2132_saltkey=${htVD_2132_saltkey}
