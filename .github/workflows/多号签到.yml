@@ -87,7 +87,7 @@ jobs:
         password4: ${{secrets.password4}}
         appid4: ${{secrets.appid4}}
         notify_sctkey: ${{secrets.NOTIFY_SCKEY}}
-      run: node index.js unicom --user=${user1} --password=${password} --appid=${appid1} ;
+      run: #node index.js unicom --user=${user1} --password=${password} --appid=${appid1} ;
            node index.js unicom --user=${user2} --password=${password} --appid=${appid2} ;
            node index.js unicom --user=${user3} --password=${password} --appid=${appid3} ;
            node index.js unicom --user=${user4} --password=${password4} --appid=${appid4} 
